@@ -4,8 +4,7 @@
   "info": {
     "singularName": "common",
     "pluralName": "commons",
-    "displayName": "Common",
-    "description": ""
+    "displayName": "common"
   },
   "options": {
     "draftAndPublish": true
@@ -15,35 +14,28 @@
     "title": {
       "type": "string"
     },
-    "logo": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "socials": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::social.social"
-    },
-    "profile": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
     "about": {
       "type": "text"
+    },
+    "logo": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "profile": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
