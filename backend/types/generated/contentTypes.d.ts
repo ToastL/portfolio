@@ -436,6 +436,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
 export interface ApiSocialSocial extends Struct.CollectionTypeSchema {
   collectionName: 'socials';
   info: {
+    description: '';
     displayName: 'Social';
     pluralName: 'socials';
     singularName: 'social';
@@ -447,13 +448,13 @@ export interface ApiSocialSocial extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::social.social'
     > &
       Schema.Attribute.Private;
-    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     publishedAt: Schema.Attribute.DateTime;
     type: Schema.Attribute.Enumeration<
       ['discord', 'github', 'instagram', 'tiktok']
