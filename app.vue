@@ -58,6 +58,15 @@ const { projects, common } = await graphql(`
   }
 `)
   .then(res => res.data)
+  .catch(err => console.log(err))
+
+await graphql(`
+  query {
+    common {
+      title
+    }
+  }
+`)
 
 let icons = {}
 for (let i in common.socials)

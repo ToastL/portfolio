@@ -4,7 +4,8 @@
   "info": {
     "singularName": "common",
     "pluralName": "commons",
-    "displayName": "common"
+    "displayName": "common",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -18,24 +19,31 @@
       "type": "text"
     },
     "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "profile": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "socials": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::social.social"
     }
   }
 }
