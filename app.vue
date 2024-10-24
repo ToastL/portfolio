@@ -82,13 +82,16 @@ onMounted(() => {
     document.documentElement.classList.remove('dark')
   }
 
+
+  // Mouse handler
+
   isMobile.value = window.matchMedia('(max-width: 600px)').matches
 
   const cursor = document.getElementById('cursor') || document.createElement('span')
 
   let cursorVel = [0, 0]
-  let currCursorPos = [0, 0]
-  let cursorPos = [0, 0]
+  let currCursorPos = [-20, -20]
+  let cursorPos = [-20, -20]
 
   document.addEventListener('mousemove', (e) => {
     cursorPos[0] = e.x - cursor.clientWidth / 2
@@ -109,6 +112,41 @@ onMounted(() => {
   }
 
   mouseLoop()
+
+
+
+  // Profile handler
+
+  const profileDiv = document.getElementById("profileDiv") || document.createElement("div")
+
+  let profileDivVel = [0, 0]
+  let currProfileDivPos = [profileDiv.clientWidth/2, profileDiv.clientHeight/2]
+  let profileDivPos = [profileDiv.clientWidth/2, profileDiv.clientHeight/2]
+
+  profileDiv.addEventListener("mousemove", e => {
+    profileDivPos[0] = e.offsetX
+    profileDivPos[1] = e.offsetY
+  })
+
+  profileDiv.addEventListener("mouseleave", () => profileDivPos = [profileDiv.clientWidth/2, profileDiv.clientHeight/2])
+
+  const profileDivLoop = () => {
+    profileDivVel[0] = (profileDivPos[0]-currProfileDivPos[0])*.2
+    profileDivVel[1] = (profileDivPos[1]-currProfileDivPos[1])*.2
+    
+    currProfileDivPos[0] += profileDivVel[0]
+    currProfileDivPos[1] += profileDivVel[1]
+
+    profileDiv.style.transform = `perspective(500px) rotateX(${(currProfileDivPos[1] - profileDiv.clientHeight / 2) / 10}deg) rotateY(${-(currProfileDivPos[0] - profileDiv.clientWidth / 2) / 10}deg)`
+
+    requestAnimationFrame(profileDivLoop)
+  }
+
+  profileDivLoop()
+
+
+
+  // Project scroll handler
 
   document.addEventListener('mousedown', () => mouseDown.value = true)
   document.addEventListener('mouseup', () => mouseDown.value = false)
@@ -156,22 +194,12 @@ onMounted(() => {
   }
 
   scrollLoop()
-
-  const profileDiv = document.getElementById("profileDiv")
-  profileDiv?.addEventListener("mousemove", e => {
-    let mouseX = e.offsetX
-    let mouseY = e.offsetY
-    profileDiv.style.transition = 'none'
-    profileDiv.style.transform = `perspective(500px) rotateX(${(mouseY - profileDiv.clientHeight / 2) / 10}deg) rotateY(${-(mouseX - profileDiv.clientWidth / 2) / 10}deg)`
-  })
-
-  profileDiv?.addEventListener("mouseleave", () => { profileDiv.style.transition = '150ms transform cubic-bezier(0.4, 0, 0.2, 1)'; profileDiv.style.transform = "" })
 })
 
 </script>
 
 <template>
-  <span v-if="!isMobile" id="cursor" class="z-20 fixed -left-20 -top-20 pointer-events-none">
+  <span v-if="!isMobile" id="cursor" class="z-20 fixed pointer-events-none">
     <div
       class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[2px] h-[2px] dark:bg-white bg-black rounded-full">
     </div>
