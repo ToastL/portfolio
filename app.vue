@@ -131,8 +131,8 @@ onMounted(() => {
   profileDiv.addEventListener("mouseleave", () => profileDivPos = [profileDiv.clientWidth/2, profileDiv.clientHeight/2])
 
   const profileDivLoop = () => {
-    profileDivVel[0] = (profileDivPos[0]-currProfileDivPos[0])*.2
-    profileDivVel[1] = (profileDivPos[1]-currProfileDivPos[1])*.2
+    profileDivVel[0] = Math.round((profileDivPos[0]-currProfileDivPos[0])*.2)
+    profileDivVel[1] = Math.round((profileDivPos[1]-currProfileDivPos[1])*.2)
     
     currProfileDivPos[0] += profileDivVel[0]
     currProfileDivPos[1] += profileDivVel[1]
