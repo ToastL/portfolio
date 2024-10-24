@@ -58,7 +58,6 @@ const { projects, common } = await graphql(`
   }
 `)
   .then(res => res.data)
-  .catch(err => console.log(err))
 
 await graphql(`
   query {
@@ -87,13 +86,29 @@ onMounted(() => {
 
   const cursor = document.getElementById('cursor') || document.createElement('span')
 
-  document.addEventListener('mousemove', (e) => {
-    const cursorPosX = e.x - cursor.clientWidth / 2
-    const cursorPosY = e.y - cursor.clientHeight / 2
+  let cursorVel = [0, 0]
+  let currCursorPos = [0, 0]
+  let cursorPos = [0, 0]
 
-    cursor.style.top = `${cursorPosY}px`
-    cursor.style.left = `${cursorPosX}px`
+  document.addEventListener('mousemove', (e) => {
+    cursorPos[0] = e.x - cursor.clientWidth / 2
+    cursorPos[1] = e.y - cursor.clientHeight / 2
   })
+
+  const mouseLoop = () => {
+    cursorVel[0] = (cursorPos[0]-currCursorPos[0])*.2
+    cursorVel[1] = (cursorPos[1]-currCursorPos[1])*.2
+
+    currCursorPos[0] += cursorVel[0]
+    currCursorPos[1] += cursorVel[1]
+
+    cursor.style.left = `${currCursorPos[0]}px`
+    cursor.style.top = `${currCursorPos[1]}px`
+
+    requestAnimationFrame(mouseLoop)
+  }
+
+  mouseLoop()
 
   document.addEventListener('mousedown', () => mouseDown.value = true)
   document.addEventListener('mouseup', () => mouseDown.value = false)
