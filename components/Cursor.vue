@@ -24,7 +24,7 @@ onMounted(() => {
 
     const mouseLoop = () => {
 
-        innerCursorVel[0] = (cursorPos[0]-currCursorPos[0])*.2
+        innerCursorVel[0] = (cursorPos[0]-currCursorPos[0])*.2 
         innerCursorVel[1] = (cursorPos[1]-currCursorPos[1])*.2
 
         currCursorPos[0] += innerCursorVel[0]
