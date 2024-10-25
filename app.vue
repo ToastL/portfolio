@@ -192,7 +192,7 @@ onMounted(() => {
             :key="index" class="relative w-[20rem] h-[20rem] dark:bg-secondary-dark bg-secondary rounded-md transition-all z-0 overflow-hidden
                                   hover:scale-105 hover:shadow-xl hover:z-10 group">
             <div class="w-full h-full p-3">
-              <div class="w-full h-full dark:bg-primary-dark bg-primary-light rounded-md">
+              <div class="w-full h-full dark:bg-primary-dark bg-primary-light rounded-md overflow-hidden">
                 <img v-if="project.banner" class="w-full h-full object-cover" :src="useStrapiMedia(project.banner.url)"
                   alt="Banner">
               </div>
@@ -201,11 +201,11 @@ onMounted(() => {
             <div
               class="absolute flex flex-col justify-between left-0 top-0 w-full h-full backdrop-blur-sm p-5 transition-all group-hover:opacity-100 opacity-0">
               <div>
-                <h1 class="mb-2">{{ project.title }}</h1>
-                <p class="pl-2 text-sm">{{ project.description }}</p>
+                <h1 class="mb-2 text-white mix-blend-difference">{{ project.title }}</h1>
+                <p class="pl-2 text-sm text-white mix-blend-difference">{{ project.description }}</p>
               </div>
               <div v-if="project.git" class="p-2">
-                <a :href="project.git" class="bg-white p-2 text-black rounded-md">Visit the git!</a>
+                <a :href="project.git" class="bg-white p-2 text-black rounded-md mix-blend-difference">Visit the git!</a>
               </div>
             </div>
           </div>

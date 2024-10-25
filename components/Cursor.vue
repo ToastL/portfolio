@@ -13,7 +13,7 @@ onMounted(() => {
     const cursorOuter = document.getElementById('cursorOuter') || document.createElement('div')
 
     let innerCursorVel = [0, 0]
-    let currCursorPos = [-20, -20]
+    let currCursorPos = [50, -20]
 
     let cursorPos = [-20, -20]
 
@@ -45,10 +45,10 @@ onMounted(() => {
 
 <template>
     <div id="cursorInner"
-      class="fixed z-20 -translate-x-1/2 -translate-y-1/2 w-[4px] h-[4px] dark:bg-white bg-black rounded-full pointer-events-none">
+      class="fixed z-20 -translate-x-1/2 -translate-y-1/2 w-[4px] h-[4px] bg-white  rounded-full pointer-events-none mix-blend-difference">
     </div>
     <div id="cursorOuter"
-      :class="'fixed z-20 -translate-x-1/2 -translate-y-1/2 bg-transparent border dark:border-white border-black rounded-full pointer-events-none ' + (mouseDown ? 'w-[30px] h-[30px] duration-[50ms]' : ' w-[50px] h-[50px] duration-200')">
+      :class="'fixed z-20 -translate-x-1/2 -translate-y-1/2 bg-transparent border border-white  rounded-full pointer-events-none mix-blend-difference ' + (mouseDown ? 'w-[30px] h-[30px] duration-[50ms]' : ' w-[50px] h-[50px] duration-200')">
     </div>
     <span v-if="!isMobile">
     </span>
