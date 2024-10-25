@@ -144,7 +144,7 @@ onMounted(() => {
     scrollX += -scrollVel
 
     scrollVel *= .95
-    if (autoScroll) scrollX += 1
+    if (autoScroll || isMobile) scrollX += 1
 
     projectScroll.style.transform = `translate3d(-${scrollX}px, 0px, 0px)`
     requestAnimationFrame(scrollLoop)
@@ -156,7 +156,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <Cursor/>
+  <Cursor v-if="!isMobile"/>
 
   <Header class="dark:text-white text-black font-mono z-10" />
 
