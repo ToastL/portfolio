@@ -39,11 +39,6 @@
         "videos",
         "audios"
       ]
-    },
-    "socials": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::social.social"
     }
   }
 }

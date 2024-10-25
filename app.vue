@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Cursor from "./components/Cursor.vue"
+
 import ModelHome from "~/components/ModelHome.vue"
 
 import Header from '~/components/Header.vue'
@@ -21,16 +23,9 @@ useSeoMeta({
   twitterCard: 'app'
 })
 
-interface Project {
-  title: Text
-  description: Text
-  banner: Text
-  documentId: Text
-}
-
 const graphql = useStrapiGraphQL()
 
-const { projects, common } = await graphql(`
+const { projects, common, socials } = await graphql(`
   query {
     projects {
       title
@@ -44,76 +39,40 @@ const { projects, common } = await graphql(`
     common {
       about
       
-      socials {
-        icon {
-          url
-        }
-        type
-        url
-      }
       profile {
         url
       }
+    }
+      
+    socials {
+      icon {
+        url
+      }
+      type
+      url
     }
   }
 `)
   .then(res => res.data)
 
-await graphql(`
-  query {
-    common {
-      title
-    }
-  }
-`)
-
 let icons = {}
-for (let i in common.socials)
-  icons[common.socials[i].type] = await fetch(useStrapiMedia(common.socials[i].icon.url)).then(res => res.text())
-
-const mouseDown = ref<Boolean>(false)
+for (let i in socials)
+  icons[socials[i].type] = await fetch(useStrapiMedia(socials[i].icon.url)).then(res => res.text())
 
 const isMobile = ref<Boolean>(false)
-
+const mouseDown = ref<Boolean>(false)
 onMounted(() => {
+  isMobile.value = window.matchMedia('(max-width: 600px)').matches
+
+  document.addEventListener('mousedown', () => mouseDown.value = true)
+  document.addEventListener('mouseup', () => mouseDown.value = false)
+
+  
   if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     document.documentElement.classList.add('dark')
   } else {
     document.documentElement.classList.remove('dark')
   }
-
-
-  // Mouse handler
-
-  isMobile.value = window.matchMedia('(max-width: 600px)').matches
-
-  const cursor = document.getElementById('cursor') || document.createElement('span')
-
-  let cursorVel = [0, 0]
-  let currCursorPos = [-20, -20]
-  let cursorPos = [-20, -20]
-
-  document.addEventListener('mousemove', (e) => {
-    cursorPos[0] = e.x - cursor.clientWidth / 2
-    cursorPos[1] = e.y - cursor.clientHeight / 2
-  })
-
-  const mouseLoop = () => {
-    cursorVel[0] = (cursorPos[0]-currCursorPos[0])*.2
-    cursorVel[1] = (cursorPos[1]-currCursorPos[1])*.2
-
-    currCursorPos[0] += cursorVel[0]
-    currCursorPos[1] += cursorVel[1]
-
-    cursor.style.left = `${currCursorPos[0]}px`
-    cursor.style.top = `${currCursorPos[1]}px`
-
-    requestAnimationFrame(mouseLoop)
-  }
-
-  mouseLoop()
-
-
 
   // Profile handler
 
@@ -147,10 +106,6 @@ onMounted(() => {
 
 
   // Project scroll handler
-
-  document.addEventListener('mousedown', () => mouseDown.value = true)
-  document.addEventListener('mouseup', () => mouseDown.value = false)
-
   const projectScroll = document.getElementById("projectScroll") || document.createElement("div")
 
   let scrollVel = 0
@@ -174,6 +129,8 @@ onMounted(() => {
       scrollVel += speed / 1000
     }
   })
+
+  projectScroll.addEventListener("click", e => e.request)
 
   projectScroll.addEventListener("mouseenter", () => autoScroll = false)
   projectScroll.addEventListener("mouseleave", () => autoScroll = true)
@@ -199,14 +156,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <span v-if="!isMobile" id="cursor" class="z-20 fixed pointer-events-none">
-    <div
-      class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[2px] h-[2px] dark:bg-white bg-black rounded-full">
-    </div>
-    <div
-      :class="'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-all bg-transparent border dark:border-white border-black rounded-full ' + (mouseDown ? 'w-[30px] h-[30px] duration-[50ms]' : ' w-[50px] h-[50px] duration-200')">
-    </div>
-  </span>
+  <Cursor/>
 
   <Header class="dark:text-white text-black font-mono z-10" />
 
@@ -218,7 +168,7 @@ onMounted(() => {
       <div class="sm:p-3 mb-2">
         <h1 class="text-2xl mb-[2rem]">Who am i?</h1>
         <p class="pl-2 sm:w-[30rem]">{{ common.about }}</p>
-        <div class="flex py-6 gap-3"><a v-for="(social, index) in common.socials" :href="social.url" target="_blank">
+        <div class="flex py-6 gap-3"><a v-for="(social, index) in socials" :href="social.url" target="_blank">
             <div class="flex justify-center items-center content-center w-10 h-10 bg-secondary-light dark:bg-secondary-dark rounded-md shadow-xl transition-all hover:scale-110 ">
               <div class="w-7">
                 <i class="fill-black dark:fill-white" v-html="icons[social.type]"></i>
@@ -249,9 +199,14 @@ onMounted(() => {
             </div>
 
             <div
-              class="absolute left-0 top-0 w-full h-full backdrop-blur-sm p-5 transition-all group-hover:opacity-100 opacity-0">
-              <h1 class="mb-2">{{ project.title }}</h1>
-              <p>{{ project.description }}</p>
+              class="absolute flex flex-col justify-between left-0 top-0 w-full h-full backdrop-blur-sm p-5 transition-all group-hover:opacity-100 opacity-0">
+              <div>
+                <h1 class="mb-2">{{ project.title }}</h1>
+                <p class="pl-2 text-sm">{{ project.description }}</p>
+              </div>
+              <div v-if="project.git" class="p-2">
+                <a :href="project.git" class="bg-white p-2 text-black rounded-md">Visit the git!</a>
+              </div>
             </div>
           </div>
         </div>
@@ -264,8 +219,6 @@ onMounted(() => {
 
 <style>
 * {
-  cursor: none;
-
   scroll-behavior: smooth;
 }
 </style>
