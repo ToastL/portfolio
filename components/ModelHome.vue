@@ -41,6 +41,7 @@ onMounted(async () => {
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.setClearColor(0x000000, 0)
 
+    if (window.matchMedia('(max-width: 600px)').matches) renderer.domElement.classList.add("pointer-events-none")
     model.value.appendChild(renderer.domElement)
 
     const controls = new OrbitControls(camera, renderer.domElement)

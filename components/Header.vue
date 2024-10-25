@@ -17,6 +17,8 @@ const common = await graphql(`
 const isMobile = ref<boolean>(false)
 onMounted(() => {
   isMobile.value = window.matchMedia('(max-width: 600px)').matches
+
+  console.log(isMobile)
 })
 
 </script>
