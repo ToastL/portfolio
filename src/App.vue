@@ -1,81 +1,71 @@
 <script setup lang="ts">
-import { markRaw, reactive } from 'vue'
+import { ref } from 'vue'
 
 import WelcomeView from '@/pages/WelcomeView.vue'
 import MeView from '@/pages/MeView.vue'
+import SkillView from '@/pages/SkillView.vue'
 import ProjectsView from '@/pages/ProjectsView.vue'
 
 import CursorElement from '@/components/CursorElement.vue'
 
-const router = reactive({
-  route: 0,
-  routes: markRaw([
-    WelcomeView,
-    MeView,
-    ProjectsView
-  ]),
+const routes = [
+  { name: 'Home', page: WelcomeView },
+  { name: 'About Me', page: MeView },
+  { name: 'My Skills', page: SkillView },
+  { name: 'Projects', page: ProjectsView },
+]
 
-  down: true,
-  allowScroll: true,
+const scroll = ref(0)
+const height = ref(window.innerHeight)
 
-  scroll(direction: number) {
-    if (!this.allowScroll) return
+const setTitle = () => (document.title = routes[Math.floor(scroll.value / height.value)].name)
+setTitle()
 
-    if (this.route + direction < 0 || this.route + direction >= this.routes.length) return
-
-    this.down = direction > 0
-
-    this.route += direction
-    this.allowScroll = false
-  },
-
-  scrollTo(location: number) {
-    if (!this.allowScroll) return
-
-    if (location < 0 || location >= this.routes.length) return
-
-    this.down = location - this.route > 0
-
-    this.route = location
-    this.allowScroll = false
-  }
+document.addEventListener('scroll', () => {
+  scroll.value = window.scrollY
+  setTitle()
 })
 
-document.addEventListener('wheel', (event) => event.deltaY > 0 ? router.scroll(1) : router.scroll(-1))
+document.addEventListener('resize', () => (height.value = window.innerHeight))
 
-let yDown: null | number = null
-document.addEventListener('touchstart', (event) => yDown = event.touches[0].clientY)
-document.addEventListener('touchmove', (event) => {
-  if (!yDown) return
-  
-  const yUp = event.touches[0].clientY
-  const yDiff = yDown - yUp
-
-  yDiff > 0 ? router.scroll(1) : router.scroll(-1)
-
-  yDown = null
-})
+function toPage(i: number) {
+  window.scrollTo(0, window.innerHeight * i)
+}
 </script>
 
 <template>
-  <main class="relative overflow-hidden flex justify-center items-center w-full h-screen">
-    <transition-group
-      enter-active-class="transition-all duration-500 ease-in z-10"
-      :enter-from-class="router.down ? 'translate-y-full' : '-translate-y-full'"
-      enter-to-class="translate-y-0"
-      leave-active-class="z-0 absolute duration-[0.49s]"
-      @after-leave="router.allowScroll = true"
+  <main class="relative w-full h-screen scroll-smooth">
+    <div
+      v-for="(route, i) in routes"
+      :key="i"
+      class="even:bg-neutral-800 odd:bg-neutral-900 relative w-full h-screen"
     >
-      <template v-for="(page, i) in router.routes">
-        <component v-if="router.route == i" :is="page" class="absolute w-full h-full" />
-      </template>
-    </transition-group>
+      <component
+        :enabled="scroll > (height - 100) * i"
+        :id="`page${i}`"
+        :is="route.page"
+        class="top-0 left-0 w-full h-full"
+        :class="{ fixed: scroll > height * i }"
+      />
+    </div>
   </main>
 
   <nav
     class="fixed flex flex-col justify-center items-center gap-5 top-0 right-0 w-20 h-screen z-20"
   >
-    <button v-for="(_, i) in router.routes" @click="router.scrollTo(i)" class="transition-colors duration-500 w-4 h-4 rounded-full border border-white" :class="{ 'bg-white': router.route == i }"></button>
+    <button
+      v-for="(route, i) in routes"
+      :key="i"
+      class="group relative transition-colors duration-500 w-4 h-4 rounded-full border border-white"
+      :class="{ 'bg-white': scroll >= height * i - height / 2 }"
+      @click="toPage(i)"
+    >
+      <h3
+        class="pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity absolute text-white whitespace-nowrap top-1/2 -translate-y-1/2 -translate-x-[115%]"
+      >
+        {{ route.name }}
+      </h3>
+    </button>
   </nav>
 
   <CursorElement />

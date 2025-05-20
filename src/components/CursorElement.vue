@@ -3,45 +3,49 @@ import { reactive } from 'vue'
 
 const cursor = reactive({
   enabled: false,
-  size: [15, 15],
+  radius: 0,
+  radiusVel: 0,
   position: [0, 0],
-  cursorPosition: [0, 0]
+  cursorPosition: [0, 0],
 })
 
-document.body.addEventListener('mousemove', (e) => {
-  cursor.position[0] = e.clientX
-  cursor.position[1] = e.clientY
+document.body.addEventListener('mousemove', (event) => {
+  cursor.position[0] = event.clientX
+  cursor.position[1] = event.clientY
 })
 
 document.body.addEventListener('mouseleave', () => (cursor.enabled = false))
-document.body.addEventListener('mouseenter', () => (cursor.enabled = true))
+document.body.addEventListener('mouseenter', (event) => {
+  cursor.enabled = true
 
+  cursor.position[0] = event.clientX
+  cursor.position[1] = event.clientY
+})
+
+document.body.addEventListener('click', () => (cursor.radiusVel = 2))
 ;(function loop() {
-  cursor.cursorPosition[0] += (cursor.position[0] - cursor.cursorPosition[0]) / 3
-  cursor.cursorPosition[1] += (cursor.position[1] - cursor.cursorPosition[1]) / 3
+  cursor.cursorPosition[0] += (cursor.position[0] - cursor.cursorPosition[0]) / 5
+  cursor.cursorPosition[1] += (cursor.position[1] - cursor.cursorPosition[1]) / 5
+
+  cursor.radius += cursor.radiusVel
+  if (cursor.enabled) cursor.radius += (25 - cursor.radius) / 10
+
+  cursor.radiusVel -= 0.3
+  if (cursor.radiusVel < -1) cursor.radiusVel = -1
+  if (cursor.radius < 0) cursor.radius = 0
 
   requestAnimationFrame(loop)
 })()
 </script>
 
 <template>
-  <transition
-    enter-active-class="transition-transform absolute duration-200"  
-    enter-from-class="scale-0"
-    enter-to-class="scale-100"
-    leave-active-class="transition-transform absolute duration-200"  
-    leave-from-class="scale-100"
-    leave-to-class="scale-0"
-  >
-    <div
-      v-if="cursor.enabled"
-      :style="{
-        left: `${cursor.cursorPosition[0] - cursor.size[0] / 2}px`,
-        top: `${cursor.cursorPosition[1] - cursor.size[1] / 2}px`,
-        width: `${cursor.size[0]}px`,
-        height: `${cursor.size[1]}px`,
-      }"
-      class="pointer-events-none fixed rounded-full backdrop-invert z-20 backdrop-saturate"
-    ></div>
-  </transition>
+  <div
+    :style="{
+      left: `${cursor.cursorPosition[0] - cursor.radius / 2}px`,
+      top: `${cursor.cursorPosition[1] - cursor.radius / 2}px`,
+      width: `${cursor.radius}px`,
+      height: `${cursor.radius}px`,
+    }"
+    class="pointer-events-none fixed rounded-full backdrop-invert z-20 backdrop-saturate"
+  ></div>
 </template>
