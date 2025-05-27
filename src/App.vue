@@ -11,8 +11,8 @@ import CursorElement from '@/components/CursorElement.vue'
 const routes = [
   { name: 'Home', page: WelcomeView },
   { name: 'About Me', page: MeView },
-  { name: 'My Skills', page: SkillView },
-  { name: 'Projects', page: ProjectsView },
+  { name: 'Mijn Skills', page: SkillView },
+  { name: 'Projecten', page: ProjectsView },
 ]
 
 const scroll = ref(0)

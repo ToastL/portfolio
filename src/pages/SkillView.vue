@@ -9,7 +9,7 @@ const { enabled } = defineProps<{
 <template>
   <section class="flex justify-center items-center">
     <div class="flex flex-col gap-3">
-      <h1 class="text-xl font-bold">These are the things im good at!</h1>
+      <h1 class="text-center text-xl font-bold">Waar ben ik goed in?</h1>
 
       <div
         v-for="(skill, i) in skills.sort((a, b) => b.level - a.level)"
@@ -18,7 +18,7 @@ const { enabled } = defineProps<{
       >
         <h2>{{ skill.name }}</h2>
         <div
-          class="bg-neutral-800 w-full h-5 border border-neutral-700 rounded-full shadow overflow-hidden"
+          class="bg-neutral-800 w-80 h-5 border border-neutral-700 rounded-full shadow overflow-hidden"
         >
           <div
             :style="{

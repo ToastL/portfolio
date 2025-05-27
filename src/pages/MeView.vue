@@ -56,13 +56,13 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="flex justify-center items-center gap-5">
-    <div class="max-w-sm text-end">
+  <section class="flex md:flex-row flex-col-reverse justify-center items-center gap-5">
+    <div class="max-w-sm md:text-end text-center">
       <h1 class="text-xl font-bold">Hallo, ik ben Etien den Ouden.</h1>
 
       <p class="text-neutral-300/90">
-        Ik ben {{ getAge(new Date('08/14/2006')) }} jaar oud, ik hou van web development en doe
-        graag ook projecten los daarvan. <br><br>Ik sta open om nieuwe dingen te leren en mijn kennis groter
+        Ik ben {{ getAge(new Date('08/14/2006')) }} jaar oud, ik hou van web development en doe ook
+        graag projecten los daarvan. <br><br>Ik sta open om nieuwe dingen te leren en mijn kennis groter
         te maken.
       </p>
 
