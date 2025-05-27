@@ -61,7 +61,7 @@ function toPage(i: number) {
       @click="toPage(i)"
     >
       <h3
-        class="pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity absolute text-white whitespace-nowrap top-1/2 -translate-y-1/2 -translate-x-[115%]"
+        class="pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity absolute whitespace-nowrap top-1/2 -translate-y-1/2 -translate-x-[115%]"
       >
         {{ route.name }}
       </h3>

@@ -1,29 +1,14 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { supabase } from '@/assets/supabase'
-import { type Tables } from '@/assets/database.types'
+import { skills } from '@/assets/data'
 
 const { enabled } = defineProps<{
   enabled?: boolean
 }>()
-
-const skills = ref<Tables<'skill'>[]>([])
-
-async function getData() {
-  const { data } = await supabase.from('skill').select()
-  if (!data) return
-
-  skills.value = data
-}
-
-onMounted(() => {
-  getData()
-})
 </script>
 
 <template>
   <section class="flex justify-center items-center">
-    <div class="flex flex-col text-white gap-3">
+    <div class="flex flex-col gap-3">
       <h1 class="text-xl font-bold">These are the things im good at!</h1>
 
       <div

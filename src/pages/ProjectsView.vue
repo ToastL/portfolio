@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { projects } from '@/assets/data'
 
 const { enabled } = defineProps<{
   enabled?: boolean
@@ -50,10 +51,20 @@ function onScroll(e: WheelEvent) {
         ref="scrollBar"
       >
         <div
-          v-for="i in 8"
+          v-for="(project, i) in projects.concat(...projects)"
           :key="i"
-          class="min-w-80 h-full bg-neutral-700/40 rounded-md border border-neutral-700 shadow scale-95 hover:scale-100 transition-transform"
-        ></div>
+          class="flex flex-col justify-between items-start min-w-80 h-full bg-neutral-700/40 rounded-md border border-neutral-700 shadow scale-95 hover:scale-100 transition-transform p-3 shadow-xl"
+        >
+          <div
+            class="w-full h-56 bg-neutral-700 rounded-md border border-neutral-600 shadow overflow-hidden"
+          >
+            <img class="w-full h-full" src="" alt="" />
+          </div>
+          <h2 class="ml-4">{{ project.name }}</h2>
+          <button class="bg-orange-600 border border-orange-500 ml-3 px-2 py-1 rounded-md shadow">
+            Github
+          </button>
+        </div>
       </div>
     </div>
   </section>

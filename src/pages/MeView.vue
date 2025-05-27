@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 
-import { supabase } from '@/assets/supabase'
+import profile from '@/assets/images/profile.jpeg'
 
-const name = ref('')
-const description = ref('')
-const profile = ref('')
+function isLeapYear(year: number) {
+  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
+}
 
-async function getData() {
-  const { data } = await supabase.from('main').select()
-  if (!data) {
-    console.error('Could not fetch data from the database!')
-    return
+function getAge(start: Date) {
+  const startDate = new Date(start)
+  const endDate = new Date()
+  let timeDifference = endDate.getTime() - startDate.getTime()
+
+  let year = startDate.getFullYear()
+  while (year <= endDate.getFullYear()) {
+    if (isLeapYear(year)) timeDifference -= 24 * 60 * 60 * 1000
+    year += 1
   }
 
-  name.value = data[0].name
-  description.value = data[0].description
-  profile.value = supabase.storage.from('images').getPublicUrl(data[0].profile).data.publicUrl
+  return Math.floor(timeDifference / 1000 / 60 / 60 / 24 / 365)
 }
 
 onMounted(async () => {
-  getData()
-
   const profileDiv = document.getElementById('profileDiv')
 
   const profileVel = [0, 0]
@@ -39,8 +39,8 @@ onMounted(async () => {
 
   const profileLoop = () => {
     if (profileDiv) {
-      profileVel[0] = (profilePos[0] - currProfilePos[0]) * 0.1
-      profileVel[1] = (profilePos[1] - currProfilePos[1]) * 0.1
+      profileVel[0] = (profilePos[0] - currProfilePos[0]) * 0.2
+      profileVel[1] = (profilePos[1] - currProfilePos[1]) * 0.2
 
       currProfilePos[0] += profileVel[0]
       currProfilePos[1] += profileVel[1]
@@ -56,14 +56,27 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="flex justify-center items-center gap-5 text-white">
+  <section class="flex justify-center items-center gap-5">
     <div class="max-w-sm text-end">
-      <h1 class="text-xl font-bold">Hello, i'm {{ name }}.</h1>
-      <p>{{ description }}</p>
+      <h1 class="text-xl font-bold">Hallo, ik ben Etien den Ouden.</h1>
+
+      <p class="text-neutral-300/90">
+        Ik ben {{ getAge(new Date('08/14/2006')) }} jaar oud, ik hou van web development en doe
+        graag ook projecten los daarvan. <br><br>Ik sta open om nieuwe dingen te leren en mijn kennis groter
+        te maken.
+      </p>
+
+      <div class="space-x-2 mt-3">
+        <a
+          href="https://github.com/ToastL"
+          class="bg-orange-600 border border-orange-500 ml-3 px-2 py-1 rounded-md shadow"
+          >Github</a
+        >
+      </div>
     </div>
     <div
       id="profileDiv"
-      class="w-62 h-82 rounded-lg border border-neutral-700 shadow-xl overflow-hidden"
+      class="w-62 h-82 rounded-2xl border border-neutral-700 shadow-2xl overflow-hidden"
     >
       <img :src="profile" alt="Profile" />
     </div>
