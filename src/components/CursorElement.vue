@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
+
+const isMobile = computed(() => {
+  return screen.width <= 760
+})
 
 const cursor = reactive({
   enabled: false,
@@ -40,6 +44,7 @@ document.body.addEventListener('click', () => (cursor.radiusVel = 2))
 
 <template>
   <div
+    v-if="!isMobile"
     :style="{
       left: `${cursor.cursorPosition[0] - cursor.radius / 2}px`,
       top: `${cursor.cursorPosition[1] - cursor.radius / 2}px`,
