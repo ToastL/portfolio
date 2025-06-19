@@ -32,6 +32,8 @@ function onScroll(e: WheelEvent) {
 
   if (enabled && autoScroll.value) velocityX = -50
 
+  if (Math.abs(velocityX) > 5000) velocityX = (velocityX < 0) ? -5000 : 5000
+
   start = now
   requestAnimationFrame(loop)
 })(0)
@@ -40,7 +42,7 @@ function onScroll(e: WheelEvent) {
 <template>
   <section class="flex justify-center items-center">
     <div
-      class="flex items-center w-10/12 h-96 overflow-x-hidden"
+      class="flex items-center w-full md:w-10/12 h-96 overflow-x-hidden"
       @mouseenter="autoScroll = false"
       @mouseleave="autoScroll = true"
       @wheel="onScroll"
@@ -53,12 +55,15 @@ function onScroll(e: WheelEvent) {
         <div
           v-for="(project, i) in projects.concat(...projects)"
           :key="i"
-          class="flex flex-col justify-between items-start min-w-80 h-full bg-neutral-700/40 rounded-md border border-neutral-700 shadow scale-95 hover:scale-100 transition-transform p-3 shadow-xl"
+          class="flex flex-col justify-between items-start min-w-80 h-full bg-neutral-700/40 rounded-md border border-neutral-700 scale-95 hover:scale-100 transition-transform p-3 shadow-xl"
         >
           <div
             class="w-full h-56 bg-neutral-700 rounded-md border border-neutral-600 shadow overflow-hidden"
           >
-            <img class="w-full h-full" src="" alt="" />
+            <img v-if="project.image" class="w-full h-full object-cover" :src="project.image" alt="" />
+            <div v-else class="flex justify-center items-center w-full h-full">
+              <p>Geen Afbeelding Beschikbaar</p>
+            </div>
           </div>
           <h2 class="ml-4">{{ project.name }}</h2>
           <button class="bg-orange-600 border border-orange-500 ml-3 px-2 py-1 rounded-md shadow">

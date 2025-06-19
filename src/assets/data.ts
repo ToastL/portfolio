@@ -1,3 +1,5 @@
+import focus6 from "./images/focus6.png"
+
 export type Skill = {
   name: string
   level: number
@@ -18,7 +20,7 @@ export type Project = {
 }
 
 export const projects: Project[] = [
-  { name: 'Focus6/Spiegelspel', image: '', github: '' },
+  { name: 'Focus6/Spiegelspel', image: focus6, github: '' },
   { name: 'Hendrik Hogendijk', image: '', github: '' },
   { name: 'Toast Lang', image: '', github: 'https://github.com/ToastL/TL' },
   { name: 'Game Engine', image: '', github: 'https://github.com/ToastL/Engine' },
