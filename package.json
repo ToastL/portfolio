@@ -19,6 +19,5 @@
     "typescript": "~5.8.3",
     "vite": "^7.0.0",
     "vue-tsc": "^2.2.10"
-  },
-  "packageManager": "yarn@4.9.1"
+  }
 }
