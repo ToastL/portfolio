@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background-color: black;
+
+  user-select: none;
+}
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
+img {
+  pointer-events: none;
+}
