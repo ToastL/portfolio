@@ -6,6 +6,7 @@ import VueIcon from "../components/icons/VueIcon.vue";
 import PostgresIcon from "../components/icons/PostgresIcon.vue";
 
 import focus6 from "./img/focus6.png"
+import shareddocument from "./img/shareddocument.png"
 
 export const routes = {
     home: {
@@ -30,7 +31,8 @@ export type Project = {
     title: string
     img: string
     detail: string
-    github: string
+    github?: string
+    link?: string
 }
 
 export const projects: Project[] = [
@@ -43,8 +45,14 @@ export const projects: Project[] = [
     {
         title: 'Focus6',
         img: focus6,
-        detail: 'Ik heb hierbij voor school een website gebouwd in een groep van 4 mensen, waarbij we gebruik maakten van Vue en TailwindCSS voor het stylen gebruikten.\n\nWij moesten hierin beiden de Focus6 website en het Spiegelspel website opnieuw bouwen waarbij ik vooral gewerkt heb aan de Focus6 website.',
-        github: ''
+        detail: 'Ik heb hierbij voor school een website gebouwd in een groep van 4 mensen, waarbij we gebruik maakten van Vue en TailwindCSS voor het stylen.\n\nWij moesten hierin beiden de Focus6 website en het Spiegelspel website opnieuw bouwen waarbij ik vooral gewerkt heb aan de Focus6 website.',
+    },
+    {
+        title: 'Shared Document',
+        img: shareddocument,
+        detail: 'Ik heb hierbij voor opdracht in school gekozen om een gedeelde document te maken, waarbij de gebruiker het kan aanpassen en een andere gebruiker het meteen ziet veranderen\n\nHierbij heb ik gebruik gemaakt van socket en de front-end gebouwt in Vue en de back-end in VLang met Redis als database.',
+        github: 'https://github.com/ToastL/SharedDocument',
+        link: 'https://shareddocument.etiendenouden.nl'
     }
 ]
 

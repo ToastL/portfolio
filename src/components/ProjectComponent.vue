@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted } from "vue";
 import type { Project } from "../assets/data";
 
 import GithubIcon from "./icons/GithubIcon.vue";
+import LinkIcon from "./icons/LinkIcon.vue";
 
 const { project } = defineProps<{
   project?: Project;
@@ -28,7 +29,6 @@ onMounted(() => {
 onUnmounted(() => {
   document.removeEventListener("click", handleClickOutside);
 });
-
 </script>
 
 <template>
@@ -50,7 +50,10 @@ onUnmounted(() => {
       </h4>
 
       <div
-        :class="['relative overflow-hidden border-neutral-700', active ? 'h-40 border-b-2' : 'h-full']"
+        :class="[
+          'relative overflow-hidden border-neutral-700',
+          active ? 'h-40 border-b-2' : 'h-full',
+        ]"
       >
         <img
           class="h-full w-full object-cover"
@@ -62,13 +65,23 @@ onUnmounted(() => {
       <transition name="fade">
         <div v-if="active" class="flex justify-center z-0 py-5">
           <div class="w-72 space-y-5">
-            <p class="text-neutral-300 text-sm whitespace-pre-line">{{ project.detail }}</p>
-            <div class="flex justify-start">
+            <p class="text-neutral-300 text-sm whitespace-pre-line">
+              {{ project.detail }}
+            </p>
+            <div class="flex justify-start gap-2">
               <a
+                v-if="project.github"
                 target="_blank"
                 :href="project.github"
                 class="p-2 border-2 border-neutral-700"
                 ><GithubIcon class="fill-white w-5 h-5"
+              /></a>
+              <a
+                v-if="project.link"
+                target="_blank"
+                :href="project.link"
+                class="p-2 border-2 border-neutral-700"
+                ><LinkIcon class="fill-white w-5 h-5"
               /></a>
             </div>
           </div>

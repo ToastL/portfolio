@@ -33,8 +33,8 @@ function mobileDrag(e: TouchEvent) {
 }
 
 (function loop() {
-  currPos[0] += (newPos[0] - currPos[0]) * 0.05;
-  currPos[1] += (newPos[1] - currPos[1]) * 0.05;
+  currPos[0] += (newPos[0] - currPos[0]) * .05;
+  currPos[1] += (newPos[1] - currPos[1]) * .05;
 
   if (currPos[0] > 0) {
     currPos[0] -= containerSize;
