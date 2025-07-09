@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 
-import Navbar from "./components/Navbar.vue";
-
 import ScrollComponent from "./components/ScrollComponent.vue";
 import ProjectComponent from "./components/ProjectComponent.vue";
+import NavbarComponent from "./components/NavbarComponent.vue";
+import CursorComponent from "./components/CursorComponent.vue";
 
 import GithubIcon from "./components/icons/GithubIcon.vue";
 import MailIcon from "./components/icons/MailIcon.vue";
@@ -131,7 +131,6 @@ onMounted(() => {
         class="col-span-2 row-span-7 col-start-1 row-start-1 border border-neutral-700"
       ></div>
     </ScrollComponent>
-    <Navbar @navigate="navigate" class="z-20" />
     <div
       class="z-10 absolute top-0 left-0 w-full h-full backdrop-saturate-0 backdrop-blur-xs backdrop-brightness-200 pointer-events-none"
       style="
@@ -148,5 +147,7 @@ onMounted(() => {
         zoom: 2;
       "
     ></div>
+    <NavbarComponent @navigate="navigate" class="z-20" />
+    <CursorComponent />
   </div>
 </template>

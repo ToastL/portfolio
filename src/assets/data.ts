@@ -10,19 +10,19 @@ import focus6 from "./img/focus6.png"
 export const routes = {
     home: {
         title: "Home",
-        pos: [ -93, 0 ]
+        pos: [ 1190, 0 ]
     },
     about: {
         title: "Over Mij",
-        pos: [ -93, 364 ]
+        pos: [ 1190, 365 ]
     },
     projects: {
         title: "Projecten",
-        pos: [ 364, 250 ]
+        pos: [ 365, 250 ]
     },
     language: {
         title: "Talen",
-        pos: [ 180, -350 ]
+        pos: [ 180, 930 ]
     }
 }
 

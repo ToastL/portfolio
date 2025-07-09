@@ -71,7 +71,7 @@ defineExpose({ navigate })
 
 <template>
   <div
-    class="w-full h-full"
+    class="w-full h-full cursor-grab active:cursor-grabbing"
     @mousedown="() => (mousedown = true)"
     @mouseup="() => (mousedown = false)"
     @mousemove="(e) => !mousedown || mouseDrag(e)"

@@ -40,7 +40,7 @@ onUnmounted(() => {
         'absolute flex flex-col border-neutral-700 bg-black transition-all duration-300 overflow-hidden',
         active
           ? 'min-h-full w-[200%] -translate-1/4 z-10 border-2'
-          : 'z-0 w-full h-full',
+          : 'z-0 w-full h-full cursor-pointer',
       ]"
     >
       <h4
@@ -67,8 +67,8 @@ onUnmounted(() => {
               <a
                 target="_blank"
                 :href="project.github"
-                class="p-1 bg-[#de5d40] border border-neutral-700"
-                ><GithubIcon class="fill-white w-7 h-7"
+                class="p-2 border-2 border-neutral-700"
+                ><GithubIcon class="fill-white w-5 h-5"
               /></a>
             </div>
           </div>
