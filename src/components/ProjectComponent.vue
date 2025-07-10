@@ -65,10 +65,16 @@ onUnmounted(() => {
       <transition name="fade">
         <div v-if="active" class="flex justify-center z-0 py-5">
           <div class="w-72 space-y-5">
+            <div v-if="project.languages.length > 0" class="flex justify-start gap-2 pl-2">
+              <div v-for="lang in project.languages" class="relative p-2 border-2 border-neutral-700 group">
+                <component :is="lang.icon" class="w-5 h-5" />
+                <span class="transition-opacity opacity-0 group-hover:opacity-100 pointer-events-none absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-4 bg-black border-2 border-neutral-700 z-10 px-2 py-1 text-xs">{{ lang.title }}</span>
+              </div>
+            </div>
             <p class="text-neutral-300 text-sm whitespace-pre-line">
               {{ project.detail }}
             </p>
-            <div class="flex justify-start gap-2">
+            <div v-if="project.github || project.link" class="flex justify-start gap-2 pl-2">
               <a
                 v-if="project.github"
                 target="_blank"
