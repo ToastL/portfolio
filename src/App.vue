@@ -24,7 +24,7 @@ onMounted(() => {
 });
 
 const projectList: ProjectState[] = reactive([])
-projects.forEach((project, i) => {
+projects.forEach((project) => {
   projectList.push({
     active: false,
     projectID: project.id,

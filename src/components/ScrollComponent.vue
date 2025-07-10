@@ -6,7 +6,7 @@ const containerSize = 1280;
 let currPos = reactive([0, 0]);
 let newPos = [0, 0];
 
-let mousedown: Boolean = false;
+let mousedown: boolean = false;
 
 function mouseDrag(e: MouseEvent) {
   newPos[0] += e.movementX * 2;
@@ -74,8 +74,8 @@ defineExpose({ navigate })
     class="w-full h-full cursor-grab active:cursor-grabbing"
     @mousedown="() => (mousedown = true)"
     @mouseup="() => (mousedown = false)"
-    @mousemove="(e) => !mousedown || mouseDrag(e)"
-    @wheel="(e) => mouseWheel(e)"
+    @mousemove="(e: MouseEvent) => !mousedown || mouseDrag(e)"
+    @wheel="(e: MouseEvent) => mouseWheel(e)"
     @touchstart="
       () => {
         firstTouch = true;
@@ -83,7 +83,7 @@ defineExpose({ navigate })
       }
     "
     @touchend="() => (mousedown = false)"
-    @touchmove="(e) => !mousedown || mobileDrag(e)"
+    @touchmove="(e: TouchEvent) => !mousedown || mobileDrag(e)"
   >
     <div
       class="grid grid-cols-3 grid-rows-3"

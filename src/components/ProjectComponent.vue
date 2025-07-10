@@ -39,7 +39,6 @@ onUnmounted(() => {
     <div
       v-if="projectState && project"
       @click="projectState.active = true; projectState.disable = false"
-      @transitionend="projectState.disable = true"
       :class="[
         'absolute flex flex-col border-neutral-700 bg-black transition-all duration-300 overflow-hidden',
         projectState.active
