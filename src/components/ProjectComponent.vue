@@ -1,24 +1,27 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
-import type { Project } from "../assets/data";
+import { ref, onMounted, onUnmounted, watch } from "vue";
+import { projects, type ProjectState } from "../assets/data";
 
 import GithubIcon from "./icons/GithubIcon.vue";
 import LinkIcon from "./icons/LinkIcon.vue";
 
-const { project } = defineProps<{
-  project?: Project;
+const { projectState } = defineProps<{
+  projectState?: ProjectState;
 }>();
 
-const active = ref(false);
+const project = projects.find(project => project.id === projectState?.projectID)
+
 const containerRef = ref<HTMLElement | null>(null);
 
 function handleClickOutside(event: MouseEvent) {
   if (
-    active.value &&
+    projectState &&
+    projectState.active &&
+    projectState.disable &&
     containerRef.value &&
     !containerRef.value.contains(event.target as Node)
   ) {
-    active.value = false;
+    projectState.active = false;
   }
 }
 
@@ -34,11 +37,12 @@ onUnmounted(() => {
 <template>
   <div ref="containerRef" class="relative">
     <div
-      v-if="project"
-      @click="active = true"
+      v-if="projectState && project"
+      @click="projectState.active = true; projectState.disable = false"
+      @transitionend="projectState.disable = true"
       :class="[
         'absolute flex flex-col border-neutral-700 bg-black transition-all duration-300 overflow-hidden',
-        active
+        projectState.active
           ? 'min-h-full w-[200%] -translate-1/4 z-10 border-2'
           : 'z-0 w-full h-full cursor-pointer',
       ]"
@@ -52,7 +56,7 @@ onUnmounted(() => {
       <div
         :class="[
           'relative overflow-hidden border-neutral-700',
-          active ? 'h-40 border-b-2' : 'h-full',
+          projectState.active ? 'h-40 border-b-2' : 'h-full',
         ]"
       >
         <img
@@ -63,11 +67,11 @@ onUnmounted(() => {
       </div>
 
       <transition name="fade">
-        <div v-if="active" class="flex justify-center z-0 py-5">
+        <div v-if="projectState.active" class="flex justify-center z-0 py-5">
           <div class="w-72 space-y-5">
             <div v-if="project.languages.length > 0" class="flex justify-start gap-2 pl-2">
               <div v-for="lang in project.languages" class="relative p-2 border-2 border-neutral-700 group">
-                <component :is="lang.icon" class="w-5 h-5" />
+                <component :is="lang.icon" class="grayscale-100 brightness-200 w-5 h-5" />
                 <span class="transition-opacity opacity-0 group-hover:opacity-100 pointer-events-none absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-4 bg-black border-2 border-neutral-700 z-10 px-2 py-1 text-xs">{{ lang.title }}</span>
               </div>
             </div>

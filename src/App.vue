@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, reactive, ref, watch } from "vue";
 
 import ScrollComponent from "./components/ScrollComponent.vue";
 import ProjectComponent from "./components/ProjectComponent.vue";
@@ -11,7 +11,7 @@ import MailIcon from "./components/icons/MailIcon.vue";
 import LinkedinIcon from "./components/icons/LinkedinIcon.vue";
 
 import profile from "./assets/img/profile.jpeg";
-import { languages, projects, routes } from "./assets/data";
+import { languages, projects, routes, type ProjectState } from "./assets/data";
 import { getAge } from "./assets/js/age";
 
 const scrollRef = ref();
@@ -22,6 +22,15 @@ function navigate(x: number, y: number, instant = false) {
 onMounted(() => {
   navigate(routes.home.pos[0], routes.home.pos[1], true);
 });
+
+const projectList: ProjectState[] = reactive([])
+projects.forEach((project, i) => {
+  projectList.push({
+    active: false,
+    projectID: project.id,
+    disable: true
+  })
+})
 </script>
 
 <template>
@@ -90,7 +99,7 @@ onMounted(() => {
               i < 3 ? 'border-t-0' : '',
               i > 5 ? 'border-b-0' : '',
             ]"
-            :project="projects[i]"
+            :project-state="projectList[i]"
           />
         </div>
       </div>

@@ -34,6 +34,7 @@ export type Language = {
 };
 
 export type Project = {
+  id: number;
   title: string;
   img: string;
   detail: string;
@@ -65,8 +66,15 @@ export const languages: { [id: number]: Language } = {
   },
 };
 
+export type ProjectState = {
+  active: boolean;
+  projectID: number;
+  disable: boolean;
+}
+
 export const projects: Project[] = [
   {
+    id: 0,
     title: "Bootloader",
     img: "",
     detail:
@@ -75,6 +83,7 @@ export const projects: Project[] = [
     languages: [],
   },
   {
+    id: 1,
     title: "Focus6",
     img: focus6,
     detail:
@@ -83,6 +92,7 @@ export const projects: Project[] = [
     languages: [ languages[1], languages[2] ],
   },
   {
+    id: 2,
     title: "Shared Document",
     img: shareddocument,
     detail:
