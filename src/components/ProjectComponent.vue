@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { projects, type ProjectState } from "../assets/data";
 
 import GithubIcon from "./icons/GithubIcon.vue";
@@ -39,6 +39,7 @@ onUnmounted(() => {
     <div
       v-if="projectState && project"
       @click="projectState.active = true; projectState.disable = false"
+      @transitionend="projectState.disable = true"
       :class="[
         'absolute flex flex-col border-neutral-700 bg-black transition-all duration-300 overflow-hidden',
         projectState.active

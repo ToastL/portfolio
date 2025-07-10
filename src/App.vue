@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref, watch } from "vue";
+import { onMounted, reactive, ref } from "vue";
 
 import ScrollComponent from "./components/ScrollComponent.vue";
 import ProjectComponent from "./components/ProjectComponent.vue";
