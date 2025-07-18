@@ -2,4 +2,6 @@ import { createApp } from 'vue'
 import './assets/main.css'
 import App from './App.vue'
 
-createApp(App).mount('#app')
+import i18n from './assets/js/i18n'
+
+i18n(createApp(App)).mount('#app')

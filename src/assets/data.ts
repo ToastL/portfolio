@@ -22,7 +22,7 @@ export const routes = {
     title: "Projecten",
     pos: [365, 250],
   },
-  language: {
+  languages: {
     title: "Talen",
     pos: [180, 930],
   },
@@ -69,7 +69,7 @@ export const languages: { [id: number]: Language } = {
 export type ProjectState = {
   active: boolean;
   projectID: number;
-  disable: boolean;
+  disableCount: number;
 }
 
 export const projects: Project[] = [

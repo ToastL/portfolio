@@ -28,9 +28,17 @@ projects.forEach((project) => {
   projectList.push({
     active: false,
     projectID: project.id,
-    disable: true
+    disableCount: 0
   })
 })
+
+function disableProject(id: number) {
+  projectList[id].disableCount++
+  if (projectList[id].disableCount == 9) {
+    projectList[id].active = false
+    projectList[id].disableCount = 0
+  }
+}
 </script>
 
 <template>
@@ -48,7 +56,7 @@ projects.forEach((project) => {
         <h3
           class="text-neutral-400 px-2 py-1 border-b-2 border-neutral-700 w-full"
         >
-          Over Mij
+          {{ $t("about.title") }}
         </h3>
         <div class="w-40 h-40 bg-white">
           <img
@@ -57,11 +65,8 @@ projects.forEach((project) => {
             alt="profile"
           />
         </div>
-        <p class="text-neutral-300 text-sm p-4">
-          Ik ben {{ getAge(new Date("08/14/2006")) }} jaar oud, ik hou van web
-          development. Ik programmeer al {{getAge(new Date("06/06/2019")) }} jaar en ben begonnen met het maken van spellen in roblox, en vanuit daar doorgegroeid naar het bouwen van complexere dingen.
-          <br><br>
-          Los daarvan zit ik op dit moment in het versneld traject op Grafisch Lyceum Utrecht voor web development.
+        <p class="whitespace-pre-line text-neutral-300 text-sm p-4">
+          {{ $t("about.content", { age: getAge(new Date("08/14/2006")), experience: getAge(new Date("06/06/2019")) }) }}
         </p>
         <div class="flex justify-start gap-5">
           <a
@@ -87,7 +92,7 @@ projects.forEach((project) => {
         class="flex flex-col col-span-3 row-span-4 col-start-5 row-start-4 border border-neutral-700"
       >
         <h3 class="text-neutral-400 px-2 py-1 border-b-2 border-neutral-700">
-          Projecten
+          {{ $t("projects.title") }}
         </h3>
         <div class="grid grid-cols-3 grid-rows-3 flex-1">
           <ProjectComponent
@@ -100,6 +105,7 @@ projects.forEach((project) => {
               i > 5 ? 'border-b-0' : '',
             ]"
             :project-state="projectList[i]"
+            @disable="disableProject(i)"
           />
         </div>
       </div>
@@ -107,7 +113,7 @@ projects.forEach((project) => {
         class="flex flex-col col-span-5 row-span-3 col-start-3 row-start-1 border border-neutral-700"
       >
         <h3 class="text-neutral-400 px-2 py-1 border-b-2 border-neutral-700">
-          Talen & Tools
+          {{ $t("languages.title") }}
         </h3>
         <div class="flex-1 grid grid-cols-5 grid-rows-3">
           <div

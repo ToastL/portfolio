@@ -1,0 +1,26 @@
+{
+    "translation": {
+        "home": {
+            "title": "Home",
+            "route": "Home"
+        },
+        "about": {
+            "title": "About Me",
+            "route": "About Me",
+            "content": "I am {{ age }} years old, and I love web development. I’ve been programming for {{ experience }} years and started by making games in Roblox, and from there I progressed to building more complex things.\n\nApart from that, I am currently in the accelerated program for web development at the Grafisch Lyceum Utrecht."
+        },
+        "projects": {
+            "title": "Projects",
+            "route": "Projects",
+            "detail": {
+                "0": "For an elective assignment at school, I chose to build an x86_64 bootloader.\n\nLearning the language was a challenge, but I enjoyed learning more about low-level programming.",
+                "1": "For this school project, I built a website in a group of four people, where we used Vue and TailwindCSS for styling.\n\nWe had to rebuild both the Focus6 website and the Spiegelspel website, and I mainly worked on the Focus6 website.",
+                "2": "For a school assignment, I chose to create a shared document that users can edit, and where another user sees the changes immediately.\n\nI used sockets for this, built the front end in Vue, and the back end in VLang with Redis as the database."
+            }
+        },
+        "languages": {
+            "title": "Languages & Tools",
+            "route": "Languages"
+        }
+    }
+}
