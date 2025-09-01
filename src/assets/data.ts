@@ -5,6 +5,7 @@ import TailwindIcon from "../components/icons/TailwindIcon.vue";
 import VueIcon from "../components/icons/VueIcon.vue";
 import PostgresIcon from "../components/icons/PostgresIcon.vue";
 import VLangIcon from "../components/icons/VLangIcon.vue";
+import CppIcon from "../components/icons/CppIcon.vue";
 
 import focus6 from "./img/focus6.png";
 import shareddocument from "./img/shareddocument.png";
@@ -46,24 +47,28 @@ export type Project = {
 export const languages: { [id: number]: Language } = {
   0: {
     title: "Node.JS",
-    icon: NodeIcon,
+    icon: NodeIcon
   },
   1: {
     title: "TailwindCSS",
-    icon: TailwindIcon,
+    icon: TailwindIcon
   },
   2: {
     title: "Vue.JS",
-    icon: VueIcon,
+    icon: VueIcon
   },
   3: {
     title: "PostgreSQL",
-    icon: PostgresIcon,
+    icon: PostgresIcon
   },
   4: {
     title: "VLang",
-    icon: VLangIcon,
+    icon: VLangIcon
   },
+  5: {
+    title: "C/C++",
+    icon: CppIcon
+  }
 };
 
 export type ProjectState = {
