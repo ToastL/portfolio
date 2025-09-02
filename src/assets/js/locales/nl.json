@@ -21,6 +21,26 @@
         "languages": {
             "title": "Talen & Tools",
             "route": "Talen"
-        }
+        },
+        "summits": {
+            "title": "Summits",
+            "route": "Summits",
+            "content": "Niet alleen hou ik van programmeren, maar ook van het bereiken van bergtoppen. elke top die ik haal, motiveert me om de volgende, hogere uitdaging aan te gaan.\n\nHier zijn de toppen die ik tot nu toe heb geprobeerd te bereiken of daadwerkelijk heb gehaald:",
+            "reached": "summit bereikt"
+        },
+        "month": [
+            "Jan",
+            "Feb",
+            "Mrt",
+            "Apr",
+            "Mei",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Okt",
+            "Nov",
+            "Dec"
+        ]
     }
 }

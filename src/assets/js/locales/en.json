@@ -21,6 +21,26 @@
         "languages": {
             "title": "Languages & Tools",
             "route": "Languages"
-        }
+        },
+        "summits": {
+            "title": "Summits",
+            "route": "Summits",
+            "content": "Not do I only love programming, but also reaching mountain summits. Every peak I conquer motivates me to aim for the next, higher challenge.\n\nHere are the summits I’ve attempted or successfully reached so far:",
+            "reached": "summit reached"
+        },
+        "month": [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"
+        ]
     }
 }

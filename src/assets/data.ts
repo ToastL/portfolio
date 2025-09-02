@@ -27,6 +27,10 @@ export const routes = {
     title: "Talen",
     pos: [180, 930],
   },
+  summits: {
+    title: "Summits",
+    pos: [823, 930]
+  }
 };
 
 export type Language = {
@@ -107,3 +111,35 @@ export const projects: Project[] = [
     languages: [ languages[1], languages[2], languages[4] ],
   },
 ];
+
+export type Summit = {
+  name: string;
+  country: string;
+  date: Date;
+  summit: boolean;
+  height: number;
+}
+
+export const summits: Summit[] = [
+  {
+    name: "Pic de Morgon",
+    country: "France",
+    date: new Date("08-18-2024"),
+    summit: false,
+    height: 2324
+  },
+  {
+    name: "Fort de Dormillouse",
+    country: "France",
+    date: new Date("08-20-2024"),
+    summit: true,
+    height: 2505
+  },
+  {
+    name: "Ramolkogel",
+    country: "Austria",
+    date: new Date("08-27-2025"),
+    summit: false,
+    height: 3550
+  },
+]

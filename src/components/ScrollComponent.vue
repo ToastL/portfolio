@@ -96,7 +96,7 @@ defineExpose({ navigate })
       <div
         v-for="_ in 9"
         key="clone"
-        class="grid grid-cols-7 grid-rows-7 bg-black text-white"
+        class="grid grid-cols-7 grid-rows-7 bg-background text-primary"
         :style="{ width: `${containerSize}px`, height: `${containerSize}px` }"
       >
         <slot></slot>
