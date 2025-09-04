@@ -161,7 +161,7 @@ function disableProject(id: number) {
           {{ $t("summits.content") }}
         </p>
         <div class="flex flex-col gap-3 text-sm px-4">
-          <div class="flex items-center flex-col border-b border-border" v-for="summit in summits">
+          <div class="flex items-center flex-col pb-3 border-b border-border" v-for="summit in summits">
             <div class="flex justify-between w-full text-secondary">
               <p class="w-[130px]">{{ summit.name }}</p>
               <p>{{ summit.height }}m</p>
