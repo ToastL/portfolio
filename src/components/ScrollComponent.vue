@@ -32,9 +32,13 @@ function mobileDrag(e: TouchEvent) {
   firstTouch = false;
 }
 
-(function loop() {
-  currPos[0] += (newPos[0] - currPos[0]) * .05;
-  currPos[1] += (newPos[1] - currPos[1]) * .05;
+let lastTime = 0;
+(function loop(now: number) {
+  let dt = (now - lastTime)/1000
+  lastTime = now
+
+  currPos[0] += (newPos[0] - currPos[0]) * 5 * dt;
+  currPos[1] += (newPos[1] - currPos[1]) * 5 * dt;
 
   if (currPos[0] > 0) {
     currPos[0] -= containerSize;
@@ -54,7 +58,7 @@ function mobileDrag(e: TouchEvent) {
   }
 
   requestAnimationFrame(loop);
-})();
+})(0);
 
 function navigate(x: number, y: number, instant = false) {
   newPos[0] = -(containerSize - window.innerWidth) / 2 - x;
