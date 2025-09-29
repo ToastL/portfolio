@@ -18,7 +18,7 @@ A modern, responsive portfolio website built with Vue 3, TypeScript, and Tailwin
 
 ## 📦 Installation & Development
 
-\`\`\`bash
+```bash
 # Install dependencies
 npm install
 
@@ -30,7 +30,7 @@ npm run build
 
 # Preview production build
 npm run preview
-\`\`\`
+```
 
 ## 🌐 Live Demo
 Visit: [https://etiendenouden.nl](https://etiendenouden.nl)
