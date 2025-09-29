@@ -1,4 +1,4 @@
-import type { Component } from "vue";
+import type { Language, Project, Summit } from "../types";
 
 import NodeIcon from "../components/icons/NodeIcon.vue";
 import TailwindIcon from "../components/icons/TailwindIcon.vue";
@@ -33,21 +33,6 @@ export const routes = {
   }
 };
 
-export type Language = {
-  title: string;
-  icon: Component;
-};
-
-export type Project = {
-  id: number;
-  title: string;
-  img: string;
-  detail: string;
-  languages: Language[];
-  github?: string;
-  link?: string;
-};
-
 export const languages: { [id: number]: Language } = {
   0: {
     title: "Node.JS",
@@ -74,12 +59,6 @@ export const languages: { [id: number]: Language } = {
     icon: CppIcon
   }
 };
-
-export type ProjectState = {
-  active: boolean;
-  projectID: number;
-  disableCount: number;
-}
 
 export const projects: Project[] = [
   {
@@ -112,34 +91,26 @@ export const projects: Project[] = [
   },
 ];
 
-export type Summit = {
-  name: string;
-  country: string;
-  date: Date;
-  summit: boolean;
-  height: number;
-}
-
 export const summits: Summit[] = [
   {
     name: "Pic de Morgon",
     country: "France",
-    date: new Date("08-18-2024"),
+    date: new Date("2024-08-18"),
     summit: false,
     height: 2324
   },
   {
     name: "Fort de Dormillouse",
     country: "France",
-    date: new Date("08-20-2024"),
+    date: new Date("2024-08-20"),
     summit: true,
     height: 2505
   },
   {
     name: "Ramolkogel",
     country: "Austria",
-    date: new Date("08-27-2025"),
+    date: new Date("2025-08-27"), 
     summit: false,
     height: 3550
   },
-]
+];

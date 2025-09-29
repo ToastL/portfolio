@@ -1,5 +1,36 @@
-# Vue 3 + TypeScript + Vite
+# Etien den Ouden - Portfolio
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A modern, responsive portfolio website built with Vue 3, TypeScript, and TailwindCSS.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## 🚀 Features
+- Responsive design
+- Multi-language support (EN/NL)
+- Interactive project showcase
+- Custom cursor effects
+- Smooth scrolling navigation
+
+## 🛠️ Tech Stack
+- Vue 3 with Composition API
+- TypeScript
+- TailwindCSS
+- Vite
+- i18next for internationalization
+
+## 📦 Installation & Development
+
+\`\`\`bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+\`\`\`
+
+## 🌐 Live Demo
+Visit: [https://etiendenouden.nl](https://etiendenouden.nl)

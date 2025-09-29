@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #fff;
+  --color-border: #bfbfbf;
+  --color-primary: #000;
+  --color-secondary: #1a1a1a;
+  --color-heading: #5e5e5e;
+  --color-body: #2b2b2b;
+}
+
+.dark {
+  --color-background: #000;
+  --color-border: #404040;
+  --color-primary: #fff;
+  --color-secondary: #e5e5e5;
+  --color-heading: #a1a1a1;
+  --color-body: #d4d4d4;
+}
+
+/* Base styles */
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--color-background);
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* Image optimization */
+img {
+  pointer-events: none;
+  max-width: 100%;
+  height: 100%;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus styles for accessibility */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-heading);
+}

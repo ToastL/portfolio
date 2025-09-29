@@ -1,13 +1,25 @@
 {
-  "name": "portfolio",
+  "name": "@etiendenouden/portfolio",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Professional portfolio website showcasing web development projects and skills",
+  "author": "Etien den Ouden <etiendenouden2006@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ToastL/portfolio"
+  },
+  "keywords": ["portfolio", "vue", "typescript", "web-developer"],
+  "homepage": "https://etiendenouden.nl",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
-    "lint": "oxlint"
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "type-check": "vue-tsc --noEmit",
+    "clean": "rm -rf dist",
+    "deploy": "npm run build && npm run preview"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
