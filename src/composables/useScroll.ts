@@ -1,15 +1,16 @@
 import { reactive, ref } from 'vue'
 
+export const containerSize = 1280
+export const currPos = reactive([0, 0])
+const newPos = ref([0, 0])
+const mouseDown = ref(false)
+const oldTouchPos = ref([0, 0])
+const firstTouch = ref(false)
+
+let lastTime = 0
+let animationId: number
+
 export function useScroll() {
-  const containerSize = 1280
-  const currPos = reactive([0, 0])
-  const newPos = ref([0, 0])
-  const mouseDown = ref(false)
-  const oldTouchPos = ref([0, 0])
-  const firstTouch = ref(false)
-  
-  let lastTime = 0
-  let animationId: number
 
   function mouseDrag(e: MouseEvent) {
     newPos.value[0] += e.movementX * 2
