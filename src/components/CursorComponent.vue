@@ -49,6 +49,8 @@ function loop() {
 }
 
 onMounted(() => {
+  if (isMobile.value) return
+
   document.body.addEventListener('mousemove', onMouseMove)
   document.body.addEventListener('mouseleave', onMouseLeave)
   document.body.addEventListener('mouseenter', onMouseEnter)
@@ -57,6 +59,8 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  if (isMobile.value) return
+
   document.body.removeEventListener('mousemove', onMouseMove)
   document.body.removeEventListener('mouseleave', onMouseLeave)
   document.body.removeEventListener('mouseenter', onMouseEnter)

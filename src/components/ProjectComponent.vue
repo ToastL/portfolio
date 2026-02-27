@@ -29,12 +29,20 @@ function handleClickOutside(event: MouseEvent) {
   }
 }
 
+function handleKeydown(event: KeyboardEvent) {
+  if (event.key === 'Escape' && props.projectState?.active) {
+    emit('disable')
+  }
+}
+
 onMounted(() => {
   document.addEventListener("click", handleClickOutside);
+  document.addEventListener("keydown", handleKeydown);
 });
 
 onUnmounted(() => {
   document.removeEventListener("click", handleClickOutside);
+  document.removeEventListener("keydown", handleKeydown);
 });
 </script>
 
@@ -54,7 +62,10 @@ onUnmounted(() => {
         'relative overflow-hidden border-border',
         projectState.active ? 'h-40 border-b-2' : 'h-full',
       ]">
-        <img class="h-full w-full object-cover" :src="project.img" :alt="`Screenshot of ${project.title}`" />
+        <img v-if="project.img" class="h-full w-full object-cover" :src="project.img" :alt="`Screenshot of ${project.title}`" />
+        <div v-else class="placeholder h-full w-full flex items-center justify-center">
+          <span class="text-heading/40 text-2xl font-bold tracking-widest">{{ project.title }}</span>
+        </div>
       </div>
 
       <transition name="fade">
@@ -93,5 +104,24 @@ onUnmounted(() => {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.placeholder {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      var(--color-border) 0,
+      var(--color-border) 1px,
+      transparent 1px,
+      transparent 12px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      var(--color-border) 0,
+      var(--color-border) 1px,
+      transparent 1px,
+      transparent 12px
+    );
+  opacity: 0.4;
 }
 </style>

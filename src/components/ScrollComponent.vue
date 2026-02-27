@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from "vue";
-import { useScroll } from "../composables/useScroll";
+import { useScroll, currPos } from "../composables/useScroll";
 
 const {
-  currPos,
   mouseDown,
   firstTouch,
   mouseDrag,

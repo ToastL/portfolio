@@ -3,7 +3,7 @@ import { onMounted } from "vue";
 
 import ScrollComponent from "./components/ScrollComponent.vue";
 import ProjectComponent from "./components/ProjectComponent.vue";
-import NavbarComponent from "./components/NavbarComponent.vue";
+import MinimapComponent from "./components/MinimapComponent.vue";
 import CursorComponent from "./components/CursorComponent.vue";
 
 import { useNavigation } from "./composables/useNavigation";
@@ -121,18 +121,25 @@ onMounted(() => {
       </div>
     </ScrollComponent>
     <div
-      class="z-10 absolute top-0 left-0 w-full h-full backdrop-saturate-0 backdrop-blur-xs backdrop-brightness-200 pointer-events-none"
-      style="
-        --mask: radial-gradient(
-          circle at 50% 50%,
-          rgba(0, 0, 0, 0) 30%,
-          rgba(0, 0, 0, 1) 70%
-        );
-        mask-image: var(--mask);
-        -webkit-mask-image: var(--mask);
-        zoom: 2;
-      "></div>
-    <NavbarComponent @navigate="navigateToRoute" class="z-20" />
+      class="vignette z-10 absolute top-0 left-0 w-full h-full backdrop-saturate-50 backdrop-blur-xs pointer-events-none"></div>
+    <MinimapComponent @navigate="navigateToRoute" class="z-20" />
     <CursorComponent />
   </div>
 </template>
+
+<style>
+.vignette {
+  --mask: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(0, 0, 0, 0) 10%,
+    rgba(0, 0, 0, 1) 65%
+  );
+  mask-image: var(--mask);
+  -webkit-mask-image: var(--mask);
+  backdrop-brightness: 1.3;
+}
+
+.dark .vignette {
+  backdrop-brightness: 1.6;
+}
+</style>
