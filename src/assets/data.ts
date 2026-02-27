@@ -96,6 +96,13 @@ export const projects: Project[] = [
     github: "https://github.com/ToastL/window-visualizer",
     languages: [ languages[2], languages[6] ],
   },
+  {
+    id: 4,
+    title: "C1",
+    img: "",
+    gitlab: "https://gitlab.com/SlateOS/C1",
+    languages: [ languages[5] ],
+  },
 ];
 
 export const summits: Summit[] = [

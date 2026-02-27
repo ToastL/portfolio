@@ -16,7 +16,8 @@
                 "0": "Ik heb hierbij voor een keuzendeel opdracht in school gekozen om een x86_64 bootloader te bouwen.\n\nHet leren van de taal was wel een challenge maar ik vond het verder leuk om meer te weten te komen over low-level programmeren.",
                 "1": "Ik heb hierbij voor school een website gebouwd in een groep van 4 mensen, waarbij we gebruik maakten van Vue en TailwindCSS voor het stylen.\n\nWij moesten hierin beiden de Focus6 website en het Spiegelspel website opnieuw bouwen waarbij ik vooral gewerkt heb aan de Focus6 website.",
                 "2": "Ik heb hierbij voor opdracht in school gekozen om een gedeelde document te maken, waarbij de gebruiker het kan aanpassen en een andere gebruiker het meteen ziet veranderen\n\nHierbij heb ik gebruik gemaakt van socket en de front-end gebouwt in Vue en de back-end in VLang met Redis als database.",
-                "3": "Een real-time visualisatie tool die Chrome venster posities tracked en weergeeft als verstoringen in een geanimeerd grid.\n\nDe backend is gebouwd in Go en gebruikt AppleScript om venster posities op te halen, en stuurt deze via WebSocket naar een Vue frontend die het rendert op een HTML5 Canvas."
+                "3": "Een real-time visualisatie tool die Chrome venster posities tracked en weergeeft als verstoringen in een geanimeerd grid.\n\nDe backend is gebouwd in Go en gebruikt AppleScript om venster posities op te halen, en stuurt deze via WebSocket naar een Vue frontend die het rendert op een HTML5 Canvas.",
+                "4": "Een experimenteel hybride kernel-besturingssysteem dat FreeBSD-componenten samenvoegt met Mach-microkernel berichtuitwisseling in één codebase, zonder de vertaalgrenzen van systemen zoals XNU.\n\nMet eersteklas Mach IPC, een gebruikersruimte-stuurprogrammaframework met kernelstubs en Mach-O binaire lading."
             }
         },
         "languages": {

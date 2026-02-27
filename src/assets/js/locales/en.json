@@ -16,7 +16,8 @@
                 "0": "For an elective assignment at school, I chose to build an x86_64 bootloader.\n\nLearning the language was a challenge, but I enjoyed learning more about low-level programming.",
                 "1": "For this school project, I built a website in a group of four people, where we used Vue and TailwindCSS for styling.\n\nWe had to rebuild both the Focus6 website and the Spiegelspel website, and I mainly worked on the Focus6 website.",
                 "2": "For a school assignment, I chose to create a shared document that users can edit, and where another user sees the changes immediately.\n\nI used sockets for this, built the front end in Vue, and the back end in VLang with Redis as the database.",
-                "3": "A real-time visualization tool that tracks Chrome window positions and renders them as disturbances in an animated grid.\n\nThe backend is built in Go and uses AppleScript to retrieve window positions, sending them via WebSocket to a Vue frontend that renders it on an HTML5 Canvas."
+                "3": "A real-time visualization tool that tracks Chrome window positions and renders them as disturbances in an animated grid.\n\nThe backend is built in Go and uses AppleScript to retrieve window positions, sending them via WebSocket to a Vue frontend that renders it on an HTML5 Canvas.",
+                "4": "An experimental hybrid kernel OS merging FreeBSD components with Mach microkernel message-passing into a single codebase, eliminating the translation boundaries found in systems like XNU.\n\nFeatures first-class Mach IPC, a user-space driver framework with kernel stubs, and Mach-O binary loading."
             }
         },
         "languages": {
