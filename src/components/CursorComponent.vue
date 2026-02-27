@@ -40,8 +40,6 @@ function loop(timestamp: number) {
   const deltaTime = timestamp - lastTime
   lastTime = timestamp
 
-  console.log(deltaTime)
-
   cursor.cursorPosition[0] += (cursor.position[0] - cursor.cursorPosition[0]) / 5 * (deltaTime / 50)
   cursor.cursorPosition[1] += (cursor.position[1] - cursor.cursorPosition[1]) / 5 * (deltaTime / 50)
 
