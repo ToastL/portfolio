@@ -26,7 +26,6 @@ export interface Project {
   id: number
   title: string
   img: string
-  detail: string
   languages: Language[]
   github?: string
   link?: string

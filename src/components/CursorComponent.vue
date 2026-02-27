@@ -34,9 +34,16 @@ function onClick() {
   cursor.radiusVel = 2
 }
 
-function loop() {
-  cursor.cursorPosition[0] += (cursor.position[0] - cursor.cursorPosition[0]) / 5
-  cursor.cursorPosition[1] += (cursor.position[1] - cursor.cursorPosition[1]) / 5
+let lastTime = 0
+
+function loop(timestamp: number) {
+  const deltaTime = timestamp - lastTime
+  lastTime = timestamp
+
+  console.log(deltaTime)
+
+  cursor.cursorPosition[0] += (cursor.position[0] - cursor.cursorPosition[0]) / 5 * (deltaTime / 50)
+  cursor.cursorPosition[1] += (cursor.position[1] - cursor.cursorPosition[1]) / 5 * (deltaTime / 50)
 
   cursor.radius += cursor.radiusVel
   if (cursor.enabled) cursor.radius += (25 - cursor.radius) / 10
