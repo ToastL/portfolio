@@ -28,7 +28,7 @@ defineExpose({ navigate })
 </script>
 
 <template>
-  <div class="w-full h-full cursor-grab active:cursor-grabbing" @mousedown="mouseDown = true"
+  <div role="region" aria-label="Scrollable portfolio content" class="w-full h-full cursor-grab active:cursor-grabbing" @mousedown="mouseDown = true"
     @mouseup="mouseDown = false" @mousemove="(e: MouseEvent) => !mouseDown || mouseDrag(e)"
     @wheel="(e: WheelEvent) => mouseWheel(e)" @touchstart="
       () => {

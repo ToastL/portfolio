@@ -13,7 +13,9 @@ import { onMounted, onUnmounted, ref, nextTick, watch } from "vue";
 
 type Point = { x: number; y: number };
 
-const emits = defineEmits(["navigate"]);
+const emits = defineEmits<{
+  navigate: [routeName: keyof typeof routes]
+}>();
 
 const isDark = ref(false);
 const activeRouteIndex = ref(0);
@@ -136,7 +138,7 @@ onUnmounted(() => {
   <div class="fixed w-full bottom-10 flex justify-center items-center flex-col sm:flex-row gap-1 pointer-events-none">
     <div
       class="flex items-center gap-3 border-2 px-3 py-[4px] sm:py-[6px] border-border/80 rounded-full backdrop-blur-md pointer-events-auto">
-      <button class="relative text-primary w-5 h-5 overflow-hidden rounded-full cursor-pointer" @click="
+      <button aria-label="Toggle language" class="relative text-primary w-5 h-5 overflow-hidden rounded-full cursor-pointer" @click="
         $i18next.language == 'nl'
           ? i18next.changeLanguage('en')
           : i18next.changeLanguage('nl')
@@ -149,7 +151,7 @@ onUnmounted(() => {
           <EnglishIcon class="h-full w-1/2" />
         </div>
       </button>
-      <button class="relative fill-primary w-5 h-5 overflow-hidden cursor-pointer" @click="toggleTheme">
+      <button aria-label="Toggle theme" class="relative fill-primary w-5 h-5 overflow-hidden cursor-pointer" @click="toggleTheme">
         <div :class="[
           'absolute flex w-[200%] h-full items-center top-0 transition-transform duration-200',
           isDark ? '-translate-x-1/2' : 'translate-x-0',
@@ -173,6 +175,7 @@ onUnmounted(() => {
       </div>
       <button v-for="(routeKey, index) in routeKeys" :key="routeKey"
         :ref="(el) => { if (el) buttonRefs[index] = el as HTMLElement }" @click="() => handleNavigate(index)"
+        :aria-current="index === activeRouteIndex ? 'page' : undefined"
         class="relative z-10 transition-transform text-secondary hover:scale-105 cursor-pointer">
         {{ $t(`${routeKey}.route`) }}
       </button>

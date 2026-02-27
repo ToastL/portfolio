@@ -10,7 +10,7 @@ import nl from "./locales/nl.json";
 i18next
     .use(LanguageDetector)
     .init({
-        debug: process.env.NODE_ENV === "development",
+        debug: import.meta.env.DEV,
         fallbackLng:'nl',
         resources: {
             en,

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import { projects } from "../assets/data";
 import type { ProjectState } from "../types";
 
 import GithubIcon from "./icons/GithubIcon.vue";
 import LinkIcon from "./icons/LinkIcon.vue";
 
-const { projectState } = defineProps<{
+const props = defineProps<{
   projectState?: ProjectState;
 }>();
 
@@ -14,14 +14,14 @@ const emit = defineEmits<{
   disable: []
 }>()
 
-const project = projects.find(project => project.id === projectState?.projectID)
+const project = computed(() => projects.find(p => p.id === props.projectState?.projectID))
 
 const containerRef = ref<HTMLElement | null>(null);
 
 function handleClickOutside(event: MouseEvent) {
   if (
-    projectState &&
-    projectState.active &&
+    props.projectState &&
+    props.projectState.active &&
     containerRef.value &&
     !containerRef.value.contains(event.target as Node)
   ) {
@@ -54,7 +54,7 @@ onUnmounted(() => {
         'relative overflow-hidden border-border',
         projectState.active ? 'h-40 border-b-2' : 'h-full',
       ]">
-        <img class="h-full w-full object-cover" :src="project.img" alt="Project Image" />
+        <img class="h-full w-full object-cover" :src="project.img" :alt="`Screenshot of ${project.title}`" />
       </div>
 
       <transition name="fade">

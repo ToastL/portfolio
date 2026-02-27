@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, computed } from 'vue'
+import { reactive, computed, onMounted, onUnmounted } from 'vue'
 
 const isMobile = computed(() => {
   return screen.width <= 760
@@ -13,21 +13,28 @@ const cursor = reactive({
   cursorPosition: [0, 0],
 })
 
-document.body.addEventListener('mousemove', (event) => {
+let animationFrameId: number | null = null
+
+function onMouseMove(event: MouseEvent) {
   cursor.position[0] = event.clientX
   cursor.position[1] = event.clientY
-})
+}
 
-document.body.addEventListener('mouseleave', () => (cursor.enabled = false))
-document.body.addEventListener('mouseenter', (event) => {
+function onMouseLeave() {
+  cursor.enabled = false
+}
+
+function onMouseEnter(event: MouseEvent) {
   cursor.enabled = true
-
   cursor.position[0] = event.clientX
   cursor.position[1] = event.clientY
-})
+}
 
-document.body.addEventListener('click', () => (cursor.radiusVel = 2))
-;(function loop() {
+function onClick() {
+  cursor.radiusVel = 2
+}
+
+function loop() {
   cursor.cursorPosition[0] += (cursor.position[0] - cursor.cursorPosition[0]) / 5
   cursor.cursorPosition[1] += (cursor.position[1] - cursor.cursorPosition[1]) / 5
 
@@ -38,8 +45,26 @@ document.body.addEventListener('click', () => (cursor.radiusVel = 2))
   if (cursor.radiusVel < -1) cursor.radiusVel = -1
   if (cursor.radius < 0) cursor.radius = 0
 
-  requestAnimationFrame(loop)
-})()
+  animationFrameId = requestAnimationFrame(loop)
+}
+
+onMounted(() => {
+  document.body.addEventListener('mousemove', onMouseMove)
+  document.body.addEventListener('mouseleave', onMouseLeave)
+  document.body.addEventListener('mouseenter', onMouseEnter)
+  document.body.addEventListener('click', onClick)
+  animationFrameId = requestAnimationFrame(loop)
+})
+
+onUnmounted(() => {
+  document.body.removeEventListener('mousemove', onMouseMove)
+  document.body.removeEventListener('mouseleave', onMouseLeave)
+  document.body.removeEventListener('mouseenter', onMouseEnter)
+  document.body.removeEventListener('click', onClick)
+  if (animationFrameId !== null) {
+    cancelAnimationFrame(animationFrameId)
+  }
+})
 </script>
 
 <template>

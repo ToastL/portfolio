@@ -1,3 +1,5 @@
+import type { Component } from "vue";
+
 import GithubIcon from "../components/icons/GithubIcon.vue";
 import LinkedinIcon from "../components/icons/LinkedinIcon.vue";
 import MailIcon from "../components/icons/MailIcon.vue";
@@ -5,7 +7,7 @@ import MailIcon from "../components/icons/MailIcon.vue";
 export interface SocialLink {
   name: string
   url: string
-  icon: any
+  icon: Component
   target: '_blank' | '_self'
 }
 
@@ -17,7 +19,7 @@ export interface ProjectState {
 
 export interface Language {
   title: string
-  icon: any
+  icon: Component
 }
 
 export interface Project {

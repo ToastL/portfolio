@@ -37,7 +37,7 @@ onMounted(() => {
         </h3>
         <div class="w-full flex justify-center border-y-2 border-border">
           <div class="w-40 h-40 bg-background border-x-2 border-border">
-            <img class="w-full object-cover object-center" :src="profile" alt="profile" />
+            <img class="w-full object-cover object-center" :src="profile" alt="Profile picture of Etien den Ouden" />
           </div>
         </div>
         <p class="whitespace-pre-line text-body text-sm p-4">
