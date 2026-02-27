@@ -4,6 +4,7 @@ import { projects } from "../assets/data";
 import type { ProjectState } from "../types";
 
 import GithubIcon from "./icons/GithubIcon.vue";
+import GitlabIcon from "./icons/GitlabIcon.vue";
 import LinkIcon from "./icons/LinkIcon.vue";
 
 const props = defineProps<{
@@ -81,9 +82,12 @@ onUnmounted(() => {
             <p class="text-body text-sm whitespace-pre-line">
               {{ $t(`projects.detail.${project.id}`) }}
             </p>
-            <div v-if="project.github || project.link" class="flex justify-start gap-2 pl-2">
+            <div v-if="project.github || project.link || project.gitlab" class="flex justify-start gap-2 pl-2">
               <a v-if="project.github" target="_blank" :href="project.github" class="p-2 border-2 border-border">
                 <GithubIcon class="fill-primary w-5 h-5" />
+              </a>
+              <a v-if="project.gitlab" target="_blank" :href="project.gitlab" class="p-2 border-2 border-border">
+                <GitlabIcon class="fill-primary w-5 h-5" />
               </a>
               <a v-if="project.link" target="_blank" :href="project.link" class="p-2 border-2 border-border">
                 <LinkIcon class="fill-primary w-5 h-5" />

@@ -28,6 +28,7 @@ export interface Project {
   img: string
   languages: Language[]
   github?: string
+  gitlab?: string
   link?: string
 }
 
