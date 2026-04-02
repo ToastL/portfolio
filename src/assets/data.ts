@@ -8,9 +8,9 @@ import VLangIcon from "../components/icons/VLangIcon.vue";
 import CppIcon from "../components/icons/CppIcon.vue";
 import GoIcon from "../components/icons/GoIcon.vue";
 
-import focus6 from "./img/focus6.png";
-import shareddocument from "./img/shareddocument.png";
-import windowvisualizer from "./img/windowvisualizer.png";
+import focus6 from "./img/focus6.jpg";
+import shareddocument from "./img/shareddocument.jpg";
+import windowvisualizer from "./img/windowvisualizer.jpg";
 
 export const routes = {
   home: {

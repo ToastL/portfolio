@@ -13,7 +13,7 @@ import { useAge } from "./composables/useAge";
 import { SOCIAL_LINKS } from "./types";
 
 import { languages, summits } from "./assets/data";
-import profile from "./assets/img/profile.jpeg";
+import profile from "./assets/img/profile.jpg";
 
 const { scrollRef, navigateToRoute } = useNavigation();
 const { projectList, activate, completeClose } = useProjects();
