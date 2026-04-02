@@ -12,9 +12,9 @@ export interface SocialLink {
 }
 
 export interface ProjectState {
-  active: boolean
   projectID: number
-  disableCount: number
+  active: boolean
+  closing: boolean
 }
 
 export interface Language {

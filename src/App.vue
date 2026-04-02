@@ -16,7 +16,7 @@ import { languages, summits } from "./assets/data";
 import profile from "./assets/img/profile.jpeg";
 
 const { scrollRef, navigateToRoute } = useNavigation();
-const { projectList, disableProject } = useProjects();
+const { projectList, activate, completeClose } = useProjects();
 const { currentAge, experienceYears } = useAge();
 
 onMounted(() => {
@@ -62,7 +62,7 @@ onMounted(() => {
             i % 3 === 2 ? 'border-r-0' : '',
             i < 3 ? 'border-t-0' : '',
             i > 5 ? 'border-b-0' : '',
-          ]" :project-state="projectList[i]" @disable="disableProject(i)" />
+          ]" :project-state="projectList[i]" @activate="activate(i)" @closed="completeClose(i)" />
         </div>
       </div>
       <div class="flex flex-col col-span-5 row-span-3 col-start-3 row-start-1 border border-border">
