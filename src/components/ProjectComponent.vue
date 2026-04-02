@@ -6,6 +6,7 @@ import type { ProjectState } from "../types";
 import GithubIcon from "./icons/GithubIcon.vue";
 import GitlabIcon from "./icons/GitlabIcon.vue";
 import LinkIcon from "./icons/LinkIcon.vue";
+import SmoothText from "./SmoothText.vue";
 
 const props = defineProps<{
   projectState?: ProjectState;
@@ -79,9 +80,7 @@ onUnmounted(() => {
                 <span class="text-sm text-secondary">{{ lang.title }}</span>
               </span>
             </div>
-            <p class="text-body text-sm whitespace-pre-line">
-              {{ $t(`projects.detail.${project.id}`) }}
-            </p>
+            <SmoothText :text="$t(`projects.detail.${project.id}`)" class="text-body text-sm" :stagger="40" />
             <div v-if="project.github || project.link || project.gitlab" class="flex justify-start gap-2 pl-2">
               <a v-if="project.github" target="_blank" :href="project.github" class="p-2 border-2 border-border">
                 <GithubIcon class="fill-primary w-5 h-5" />

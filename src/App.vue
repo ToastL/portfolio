@@ -5,6 +5,7 @@ import ScrollComponent from "./components/ScrollComponent.vue";
 import ProjectComponent from "./components/ProjectComponent.vue";
 import MinimapComponent from "./components/MinimapComponent.vue";
 import CursorComponent from "./components/CursorComponent.vue";
+import SmoothText from "./components/SmoothText.vue";
 
 import { useNavigation } from "./composables/useNavigation";
 import { useProjects } from "./composables/useProjects";
@@ -33,21 +34,16 @@ onMounted(() => {
       </div>
       <div class="flex flex-col gap-6 items-center col-span-2 row-span-3 col-start-3 row-start-5 border border-border">
         <h3 class="text-heading px-2 py-1 border-b-2 border-border w-full">
-          {{ $t("about.title") }}
+          <SmoothText :text="$t('about.title')" />
         </h3>
         <div class="w-full flex justify-center border-y-2 border-border">
           <div class="w-40 h-40 bg-background border-x-2 border-border">
             <img class="w-full object-cover object-center" :src="profile" alt="Profile picture of Etien den Ouden" />
           </div>
         </div>
-        <p class="whitespace-pre-line text-body text-sm p-4">
-          {{
-            $t("about.content", {
-              age: currentAge,
-              experience: experienceYears,
-            })
-          }}
-        </p>
+        <div class="text-body text-sm p-4 w-full">
+          <SmoothText :text="$t('about.content', { age: currentAge, experience: experienceYears })" />
+        </div>
         <div class="flex justify-start gap-5">
           <a v-for="link in SOCIAL_LINKS" :key="link.name" :href="link.url" :target="link.target"
             class="p-2 border-2 border-border">
@@ -57,7 +53,7 @@ onMounted(() => {
       </div>
       <div class="flex flex-col col-span-3 row-span-4 col-start-5 row-start-4 border border-border">
         <h3 class="text-heading px-2 py-1 border-b-2 border-border">
-          {{ $t("projects.title") }}
+          <SmoothText :text="$t('projects.title')" />
         </h3>
         <div class="grid grid-cols-3 grid-rows-3 flex-1">
           <ProjectComponent v-for="(_, i) in 9" :class="[
@@ -71,7 +67,7 @@ onMounted(() => {
       </div>
       <div class="flex flex-col col-span-5 row-span-3 col-start-3 row-start-1 border border-border">
         <h3 class="text-heading px-2 py-1 border-b-2 border-border">
-          {{ $t("languages.title") }}
+          <SmoothText :text="$t('languages.title')" />
         </h3>
         <div class="flex-1 grid grid-cols-5 grid-rows-3">
           <div v-for="(_, i) in 15" :class="[
@@ -95,17 +91,19 @@ onMounted(() => {
       </div>
       <div class="col-span-2 row-span-7 col-start-1 row-start-1 border border-border">
         <h3 class="text-heading px-2 py-1 border-b-2 border-border">
-          {{ $t("summits.title") }}
+          <SmoothText :text="$t('summits.title')" />
         </h3>
-        <p class="whitespace-pre-line text-body text-sm p-4">
-          {{ $t("summits.content") }}
-        </p>
+        <div class="text-body text-sm p-4">
+          <SmoothText :text="$t('summits.content')" />
+        </div>
         <div class="flex flex-col gap-3 text-sm px-4">
           <div class="flex items-center flex-col pb-3 border-b border-border" v-for="summit in summits">
             <div class="flex justify-between w-full text-secondary">
               <p class="w-[130px]">{{ summit.name }}</p>
               <p>{{ summit.height }}m</p>
-              <p class="w-[120px]">{{ summit.summit ? $t("summits.reached") : "" }}</p>
+              <p class="w-[120px]">
+                <SmoothText v-if="summit.summit" :text="$t('summits.reached')" :stagger="20" />
+              </p>
             </div>
             <p class="text-body">
               <span>{{ summit.country }}</span>
